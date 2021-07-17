@@ -34,10 +34,17 @@ export default function SignIn() {
         [N_PASSWORD]: ""
     }
 
-    const [input, setInput] = useState(initTest)
+    const [input, setInput] = useState(init)
     const [error, setError] = useState(init)
 
-
+    //use e
+    useEffect(() => {
+        const g = async () => {
+            const ue = await Helper.getUserEmail()
+            setInput({ ...input, [N_EMAIL]: ue })
+        }
+        g()
+    }, [])
     //local method
 
     const onSubmit = async () => {
@@ -72,13 +79,15 @@ export default function SignIn() {
 
         <Container style={styles.container}>
 
+            <Icon style={styles.icon} type={DefineIcon.Feather} size={45} name="lock" />
+
             <Text style={styles.title}>Hey, Login Now</Text>
 
             <StatusBar style={Theme.STATUS_BAR} />
 
             <ResponseLayout response={app.response} />
 
-            <Input icon={<Icon type={DefineIcon.MaterialIcon} size={17} name="alternate-email" />} value={input.email} error={error?.email} onChangeText={(text) => Helper.onChange({ name: N_EMAIL, value: text, setInput: setInput, setError: setError })} label="Enter Your Email" />
+            <Input autoCapitalize={'none'} icon={<Icon type={DefineIcon.MaterialIcon} size={17} name="alternate-email" />} value={input.email} error={error?.email} onChangeText={(text) => Helper.onChange({ name: N_EMAIL, value: text, setInput: setInput, setError: setError })} label="Enter Your Email" />
 
             <Input icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />} value={input.password} error={error?.password} onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput: setInput, setError: setError })} type="password" label="Enter Password" />
 
@@ -108,6 +117,10 @@ const styles = StyleSheet.create({
         fontSize: 25,
         marginVertical: 15,
         padding: 7
+    },
+    icon: {
+        textAlign: "center",
+        color: Theme.COLOR_PRIMARY,
     },
     container: {
         justifyContent: "center"

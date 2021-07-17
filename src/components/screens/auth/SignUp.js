@@ -39,7 +39,14 @@ export default function SignUp() {
     const [input, setInput] = useState(init)
     const [error, setError] = useState(init)
 
-
+    // downloadTxtFile = () => {
+    //     const element = document.createElement("a");
+    //     const file = new Blob([document.getElementById('myInput').value], { type: 'text/plain' });
+    //     element.href = URL.createObjectURL(file);
+    //     element.download = "myFile.txt";
+    //     document.body.appendChild(element); // Required for this to work in FireFox
+    //     element.click();
+    // }
     const onSubmit = async () => {
         //validation
         const errorArray = Helper.validateObject(input)//should pass an object with key:value

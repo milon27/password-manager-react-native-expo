@@ -17,8 +17,8 @@ export default function Splash() {
                     style={styles.logo}
                 />
             </View>
-            <Text style={styles.text}>Password</Text>
-            <Text style={styles.text}>Manager</Text>
+            {/* <Text style={styles.text}>Password</Text>
+            <Text style={styles.text}>Manager</Text> */}
         </View>
     )
 }
@@ -36,16 +36,14 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     logo: {
-        width: 75,
-        height: 75,
-        borderRadius: 75 / 2,
-
+        width: 150,
+        height: 150,
+        borderRadius: 50,
     },
     logo_container: {
         margin: 15,
         padding: 8,
         alignSelf: "center",
-        borderRadius: 75 / 2,
-        backgroundColor: "white"
+        borderRadius: 75 / 2
     },
 })

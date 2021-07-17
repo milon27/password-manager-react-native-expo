@@ -75,6 +75,7 @@ class AuthAction {
                     //console.log("login response", data)
                     await AsyncStorage.setItem(Define.C_USER, JSON.stringify(data))
                     await AsyncStorage.setItem(Define.AUTH_PASS, password)
+                    await AsyncStorage.setItem(Define.AUTH_EMAIL, email)
 
                     //update UI
                     this.dispatch({
@@ -107,6 +108,7 @@ class AuthAction {
                     //delete data.token
                     await AsyncStorage.setItem(Define.C_USER, JSON.stringify(data))
                     await AsyncStorage.setItem(Define.AUTH_PASS, student_obj.pass)
+                    await AsyncStorage.setItem(Define.AUTH_EMAIL, student_obj.email)
                     //update UI
                     this.dispatch({
                         type: Types.AUTH_SIGNUP,

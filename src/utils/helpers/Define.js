@@ -13,6 +13,7 @@ const Define = {
     //local storage
     C_USER: "AUTH_C_USER",
     AUTH_PASS: "AUTH_PASS",
+    AUTH_EMAIL: "AUTH_EMAIL",
     CONTACTS: "CONTACTS",
 
 }

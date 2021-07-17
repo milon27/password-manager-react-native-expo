@@ -12,7 +12,11 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import AxiosHelper from './../../../utils/helpers/AxiosHelper';
 import AppAction from './../../../utils/context/actions/AppAction';
 import { StatusBar } from 'expo-status-bar';
+
+
 export default function CreatePassword({ route: { params } }) {
+
+    const item = params?.item;
 
     const { app } = useContext(StateContext)
     const { appDispatch } = useContext(DispatchContext)
@@ -29,7 +33,15 @@ export default function CreatePassword({ route: { params } }) {
     const N_CAT = "category"
     const N_IS_FAV = "is_fav"
 
-    const init = {
+    const init = item ? {
+        [N_TITLE]: item[N_TITLE] || "",
+        [N_URL]: item[N_URL] || "",
+        [N_EMAIL]: item[N_EMAIL] || "",
+        [N_USERNAME]: item[N_USERNAME] || "",
+        [N_PASSWORD]: "",
+        [N_USER]: item[N_USER] || "",
+        [N_IS_FAV]: item[N_IS_FAV] || false,
+    } : {
         [N_TITLE]: "",
         [N_URL]: "",
         [N_EMAIL]: "",
@@ -38,6 +50,16 @@ export default function CreatePassword({ route: { params } }) {
         [N_USER]: "",
         [N_IS_FAV]: false,
     }
+    const clear_init = {
+        [N_TITLE]: "",
+        [N_URL]: "",
+        [N_EMAIL]: "",
+        [N_USERNAME]: "",
+        [N_PASSWORD]: "",
+        [N_USER]: "",
+        [N_IS_FAV]: false,
+    }
+
     const error_init = {
         [N_TITLE]: "",
         [N_URL]: "",
@@ -89,6 +111,11 @@ export default function CreatePassword({ route: { params } }) {
             return
         }
 
+        if (value.length < 1) {
+            Helper.Toast("Select Category")
+            return
+        }
+
         let appac = new AppAction(appDispatch)
 
         const data = {
@@ -98,14 +125,24 @@ export default function CreatePassword({ route: { params } }) {
             [N_CAT]: value
         }
 
-        console.log("before sending to server :  ", data)
+        //console.log("before sending to server :  ", data)
         appac.START_LOADING()
 
-        let val = await AxiosHelper.addData('pass/create', data)
-        console.log("CreatePass response form server: ", val)
+        let val = {}
+        if (item) {
+            //do update
+            // console.log("update: ", data)
+            val = await AxiosHelper.updateData(`pass/${item?._id}`, data)
+            console.log("updatePass response after update: ", val)
+        } else {
+            val = await AxiosHelper.addData('pass/create', data)
+            console.log("CreatePass response form server: ", val)
+        }
+
+
         appac.STOP_LOADING()
         if (val.success) {
-            setInput(init)
+            setInput(clear_init)
             setValue([])
             Helper.Toast("" + val.title)
         } else {
@@ -120,31 +157,36 @@ export default function CreatePassword({ route: { params } }) {
             <Container style={{ paddingTop: 30 }}>
                 <StatusBar style={Theme.STATUS_BAR} />
                 <Input value={input[N_TITLE]} error={error[N_TITLE]}
+
                     icon={<Icon type={DefineIcon.Feather} size={17} name="feather" />}
                     label="Enter Password Title"
                     onChangeText={(text) => Helper.onChange({ name: N_TITLE, value: text, setInput, setError })}
                 />
-                <Input value={input[N_URL]} error={error[N_URL]}
+                <Input autoCapitalize={'none'} value={input[N_URL]} error={error[N_URL]}
+
                     icon={<Icon type={DefineIcon.Feather} size={17} name="link" />}
                     label="Enter Site URL"
                     onChangeText={(text) => Helper.onChange({ name: N_URL, value: text, setInput, setError })}
                 />
 
-                <Input value={input[N_USERNAME]} error={error[N_USERNAME]}
+                <Input autoCapitalize={'none'} value={input[N_USERNAME]} error={error[N_USERNAME]}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="user" />}
                     label="Enter Site Username"
+
                     onChangeText={(text) => Helper.onChange({ name: N_USERNAME, value: text, setInput, setError })}
                 />
 
-                <Input value={input[N_EMAIL]} error={error[N_EMAIL]}
+                <Input autoCapitalize={'none'} type="email-address" value={input[N_EMAIL]} error={error[N_EMAIL]}
+
                     icon={<Icon type={DefineIcon.MaterialIcon} size={17} name="alternate-email" />}
                     label="Enter Email"
                     onChangeText={(text) => Helper.onChange({ name: N_EMAIL, value: text, setInput, setError })}
                 />
 
-                <Input value={input[N_PASSWORD]} error={error[N_PASSWORD]}
+                <Input autoCapitalize={'none'} value={input[N_PASSWORD]} error={error[N_PASSWORD]}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />}
                     label="Enter Site Password"
+
                     onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput, setError })}
                 />
 
@@ -169,7 +211,7 @@ export default function CreatePassword({ route: { params } }) {
                         }
                     }
 
-                    theme="DARK"
+                    theme={Theme.STATUS_BAR_ALT.toUpperCase()}
 
                     multiple={true}
                     min={0}
@@ -191,7 +233,7 @@ export default function CreatePassword({ route: { params } }) {
 
 
 
-                <MButton style={{ elevation: 0 }} title="Create New" loading={app?.loading} color={Theme.COLOR_PRIMARY} onPress={onSubmit} disabled={app?.loading} />
+                <MButton style={{ elevation: 0 }} title={item ? "Update Now" : "Create New"} loading={app?.loading} color={Theme.COLOR_PRIMARY} onPress={onSubmit} disabled={app?.loading} />
                 {/* while loading.. it should be disabled */}
             </Container>
         </ScrollView>

@@ -4,9 +4,12 @@ import MModal from './MModal'
 import Theme from './../../../utils/helpers/Theme';
 import ListAction from './../../../utils/context/actions/ListAction';
 import { DispatchContext } from './../../../utils/context/MainContext';
+import { useNavigation } from '@react-navigation/native';
+import URL from './../../../utils/helpers/URL';
+
 
 export default function PasswordModal({ open, setOpen, item }) {
-
+    const nav = useNavigation()
     const { passDispatch } = useContext(DispatchContext)
 
     const onSubmit = async () => {
@@ -15,8 +18,12 @@ export default function PasswordModal({ open, setOpen, item }) {
         const val = await la.deleteData('pass/' + item?._id, item?._id)
         console.log("del: ", val)
     }
+    const onEdit = async () => {
+        setOpen(false)
+        nav.navigate(URL.CREATE_PASSWORD, { item })
+    }
     return (
-        <MModal title="Password Details" open={open || false} setOpen={setOpen} onSubmit={onSubmit} submitText="Delete Password">
+        <MModal title="Password Details" open={open || false} setOpen={setOpen} onSubmit={onSubmit} submitText="Delete Password" cancelText="Edit" onCancel={onEdit}>
             <Text style={styles.text}>Site: {item?.title} </Text>
             <Text style={styles.text}>URL: {item?.url} </Text>
             <Text style={styles.text}>Username: {item?.username} </Text>

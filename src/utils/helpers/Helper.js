@@ -38,8 +38,10 @@ const Helper = {
     Toast: (msg) => {
         if (Platform.OS === 'android') {
             ToastAndroid.show(msg, ToastAndroid.SHORT)
-        } else {
+        } else if ((Platform.OS === 'ios')) {
             AlertIOS.alert(msg);
+        } else {
+            alert(msg)
         }
     },//Toast
     onChange: ({ name, value, setInput, setError }) => {
@@ -65,6 +67,10 @@ const Helper = {
         const u = JSON.parse(await AsyncStorage.getItem(Define.C_USER))
         //console.log(u?._id)
         return u?._id
+    },
+    getUserEmail: async () => {
+        const u = await AsyncStorage.getItem(Define.AUTH_EMAIL)
+        return u
     },
     getPass: async () => {
         const u = await AsyncStorage.getItem(Define.AUTH_PASS)

@@ -31,7 +31,8 @@ export default function SingleRow({ item }) {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
 
             {/* {item?.url ? <Image style={styles.img} width={45} height={45} source={{ uri: "https://s2.googleusercontent.com/s2/favicons?domain_url=" + item?.url + "".toLowerCase() }} /> : } */}
-            <Icon style={{ margin: 10 }} size={35} name="globe" type={DefineIcon.OcticonIcon} />
+            <Icon style={{ margin: 10, color: Helper.ramdomColor() || Theme.COLOR_PRIMARY }} size={35} name="shield" type={DefineIcon.OcticonIcon} />
+
             {/* <View style={[styles.img, { backgroundColor: Helper?.ramdomColor() || Theme.COLOR_GRAY }]}>
                 <Text style={{ color: Theme.COLOR_WHITE }}>{item?.title.slice(0, 2)}</Text>
             </View> */}

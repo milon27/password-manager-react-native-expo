@@ -2,12 +2,14 @@ import React from 'react'
 import { View, Text, Modal, StyleSheet, StatusBar } from 'react-native'
 import MButton from '../form/MButton';
 import Theme from '../../../utils/helpers/Theme';
+import DefineIcon from './../icon/DefineIcon';
+import Icon from './../icon/Icon';
 
 export default function MModal({
-    title, open, setOpen, onSubmit, submitText = "Done", children
+    title, open, setOpen, onSubmit, onCancel, submitText = "Done", cancelText = "Cancel", children
 }) {
 
-    const onCancel = () => {
+    const onCancelLocal = () => {
         setOpen(false)
     }
 
@@ -19,12 +21,16 @@ export default function MModal({
             <StatusBar backgroundColor="rgba(0,0,0,0.6)" />
             <View style={styles.body}>
                 <View style={styles.modal}>
-                    <Text style={styles.title}>{title}</Text>
+                    <View style={styles.head}>
+                        <Text style={styles.title}>{title}</Text>
+                        <Icon type={DefineIcon.EntypoIcon} onPress={onCancelLocal} size={30} name="cross" />
+                    </View>
+
                     <View>
                         {children}
                     </View>
                     <View style={styles.btns}>
-                        <MButton style={styles.btn} title="Cancel" color={Theme.COLOR_BLACK} onPress={onCancel} />
+                        <MButton style={styles.btn} title={cancelText} color={Theme.COLOR_BLACK} onPress={onCancel || onCancelLocal} />
                         <MButton style={styles.btn} title={submitText} color={Theme.COLOR_PRIMARY} onPress={onSubmit} />
                     </View>
                 </View>
@@ -35,6 +41,10 @@ export default function MModal({
 }
 
 const styles = StyleSheet.create({
+    head: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
     body: {
         flex: 1,
         justifyContent: "center",
@@ -58,7 +68,7 @@ const styles = StyleSheet.create({
     },
     btns: {
         flexDirection: "row",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
     },
     btn: {
         marginHorizontal: 8
