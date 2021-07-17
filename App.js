@@ -1,21 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+
+import React, { useState, useEffect, useContext } from 'react';
+import MainContext, { DispatchContext } from './src/utils/context/MainContext';
+import AppNavContainer from './src/components/navigation/AppNavContainer';
+import axios from 'axios'
+import Define from './src/utils/helpers/Define';
+
+
+//axios setup
+axios.defaults.baseURL = Define.API_BASE_URL
+axios.defaults.withCredentials = true
 
 export default function App() {
+
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+
+      <MainContext>
+        <AppNavContainer />
+      </MainContext>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
