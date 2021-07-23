@@ -96,6 +96,7 @@ const AxiosHelper = {
                 if (error === false) {
                     resolve(Response(true, "delete succes", message, Define.BT_SUCCESS, {}));
                 } else {
+                    console.error("error del : ", res.data)
                     resolve(
                         Response(false, "failed", message, Define.BT_DANGER)
                     );

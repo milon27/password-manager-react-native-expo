@@ -6,17 +6,20 @@ import ListAction from './../../../utils/context/actions/ListAction';
 import { DispatchContext } from './../../../utils/context/MainContext';
 import { useNavigation } from '@react-navigation/native';
 import URL from './../../../utils/helpers/URL';
+import AreYouSureAlert from './AreYouSureAlert';
 
 
 export default function PasswordModal({ open, setOpen, item }) {
     const nav = useNavigation()
     const { passDispatch } = useContext(DispatchContext)
 
-    const onSubmit = async () => {
+    const onSubmit = () => {
         setOpen(false)
-        const la = new ListAction(passDispatch)
-        const val = await la.deleteData('pass/' + item?._id, item?._id)
-        console.log("del: ", val)
+        AreYouSureAlert("Are you sure you want to delete this password?", async () => {
+            const la = new ListAction(passDispatch)
+            const val = await la.deleteData('pass/' + item?._id, item?._id)
+            console.log("delete password res : ", val)
+        })
     }
     const onEdit = async () => {
         setOpen(false)

@@ -27,14 +27,14 @@ export default function HomeScreen() {
     //load category at once
 
     useEffect(() => {
-        console.log("load category")
+        // console.log("load category")
         const token = AxiosHelper.getSource()
         const load = async () => {
             try {
                 const uid = await Helper.getUserID()
                 const data = await AxiosHelper.getData(`pass/get-all-cat/${uid}/`, token)
                 if (data.success) {
-                    console.log("data:", data)
+                    // console.log("data:", data)
                     setCat(old => {
                         return [{
                             _id: "all_cat",
