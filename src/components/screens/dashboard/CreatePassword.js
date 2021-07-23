@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import { Text, View, StyleSheet, Switch, ScrollView } from 'react-native'
 import Icon from '../../layouts/icon/Icon';
 import Container from '../../layouts/Container';
@@ -13,7 +13,6 @@ import AxiosHelper from './../../../utils/helpers/AxiosHelper';
 import AppAction from './../../../utils/context/actions/AppAction';
 import { StatusBar } from 'expo-status-bar';
 
-
 export default function CreatePassword({ route: { params }, navigation }) {
 
     const item = params?.item;
@@ -23,6 +22,12 @@ export default function CreatePassword({ route: { params }, navigation }) {
 
     const [value, setValue] = useState([]);
     const [open, setOpen] = useState(false);
+
+    const titleRef = useRef(null)
+    const urlRef = useRef(null)
+    const usernameRef = useRef(null)
+    const emailRef = useRef(null)
+    const passRef = useRef(null)
 
     const N_TITLE = "title"
     const N_URL = "url"
@@ -167,37 +172,50 @@ export default function CreatePassword({ route: { params }, navigation }) {
 
             <Container style={{ paddingTop: 30 }}>
                 <StatusBar style={Theme.STATUS_BAR} />
-                <Input value={input[N_TITLE]} error={error[N_TITLE]}
 
+                <Input value={input[N_TITLE]} error={error[N_TITLE]}
+                    ref={titleRef}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="feather" />}
                     label="Enter Password Title"
                     onChangeText={(text) => Helper.onChange({ name: N_TITLE, value: text, setInput, setError })}
+                    nextRef={urlRef}
                 />
                 <Input autoCapitalize={'none'} value={input[N_URL]} error={error[N_URL]}
-
+                    ref={urlRef}
+                    nextRef={usernameRef}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="link" />}
                     label="Enter Site URL"
                     onChangeText={(text) => Helper.onChange({ name: N_URL, value: text, setInput, setError })}
                 />
 
-                <Input autoCapitalize={'none'} value={input[N_USERNAME]} error={error[N_USERNAME]}
+                <Input
+                    ref={usernameRef}
+                    nextRef={emailRef}
+                    autoCapitalize={'none'} value={input[N_USERNAME]} error={error[N_USERNAME]}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="user" />}
                     label="Enter Site Username"
-
                     onChangeText={(text) => Helper.onChange({ name: N_USERNAME, value: text, setInput, setError })}
                 />
 
-                <Input autoCapitalize={'none'} type="email-address" value={input[N_EMAIL]} error={error[N_EMAIL]}
-
+                <Input
+                    ref={emailRef}
+                    nextRef={passRef}
+                    autoCapitalize={'none'}
+                    type="email-address"
+                    value={input[N_EMAIL]}
+                    error={error[N_EMAIL]}
                     icon={<Icon type={DefineIcon.MaterialIcon} size={17} name="alternate-email" />}
                     label="Enter Email"
                     onChangeText={(text) => Helper.onChange({ name: N_EMAIL, value: text, setInput, setError })}
                 />
 
-                <Input autoCapitalize={'none'} value={input[N_PASSWORD]} error={error[N_PASSWORD]}
+                <Input
+                    ref={passRef}
+                    autoCapitalize={'none'}
+                    value={input[N_PASSWORD]}
+                    error={error[N_PASSWORD]}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />}
                     label="Enter Site Password"
-
                     onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput, setError })}
                 />
 

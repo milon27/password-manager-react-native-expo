@@ -1,10 +1,23 @@
 import React, { Fragment, useState } from 'react'
-import { View, StyleSheet, TextInput, Text } from 'react-native'
+import { View, StyleSheet, TextInput, Text, Keyboard } from 'react-native'
 import DefineIcon from '../icon/DefineIcon';
 import Theme from './../../../utils/helpers/Theme';
 import Icon from './../icon/Icon';
 
-export default function Input({ type = "default", label, icon, error, style, ...pros }) {
+/**
+ *
+ * @param {{ref,type,returnKeyType,returnKeyLabel,label,icon,error,style,onSubmitEditing,nextRef}} props
+ */
+function Input({
+    type = "default",
+    returnKeyType = "done",
+    returnKeyLabel = "done",
+    label,
+    icon,
+    error,
+    style,
+    nextRef,
+    ...pros }, ref) {
 
     const [secure, setSecure] = useState(true)
     const [focused, setFocused] = useState(false)
@@ -30,6 +43,7 @@ export default function Input({ type = "default", label, icon, error, style, ...
                 <View style={styles.icon}>{icon}</View>
                 <View style={styles.input}>
                     <TextInput
+                        ref={ref}
                         style={styles.inputBox}
                         selectionColor={Theme.COLOR_PRIMARY}
                         keyboardType={type === "password" ? "default" : type}
@@ -38,6 +52,16 @@ export default function Input({ type = "default", label, icon, error, style, ...
                         placeholderTextColor={Theme.COLOR_GRAY}
                         onFocus={() => setFocused(true)}
                         onBlur={() => setFocused(false)}
+                        returnKeyType={returnKeyType}
+                        returnKeyLabel={returnKeyLabel}
+                        blurOnSubmit={false}
+                        onSubmitEditing={() => {
+                            if (nextRef) {
+                                nextRef?.current?.focus()
+                            } else {
+                                Keyboard.dismiss()
+                            }
+                        }}
                         {...pros}
                     />
                     {type === "password" ? <Icon type={DefineIcon.Feather} name={secure === true ? "eye" : "eye-off"} onPress={() => { setSecure(s => !s) }} style={styles.secureBtn}></Icon> : <View></View>}
@@ -48,6 +72,8 @@ export default function Input({ type = "default", label, icon, error, style, ...
         </View >
     )
 }
+
+export default React.forwardRef(Input)
 
 const styles = StyleSheet.create({
     container: {
