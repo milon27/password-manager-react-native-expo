@@ -7,7 +7,8 @@ export default function SingleCat({ item, setSelect }) {
 
     return <View style={styles.item_container}>
         <TouchableOpacity onPress={() => {
-            setSelect(item?._id)
+            if (item.title !== "No Category")
+                setSelect(item?._id)
             Helper.Toast(item.title)
         }}>
             <Text style={{ color: Theme.COLOR_BG }}>{item.title}</Text>

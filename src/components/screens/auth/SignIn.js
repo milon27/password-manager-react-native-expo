@@ -15,6 +15,7 @@ import Response from './../../../utils/helpers/Response';
 import DefineIcon from '../../layouts/icon/DefineIcon';
 import Icon from './../../layouts/icon/Icon';
 import { StatusBar } from 'expo-status-bar';
+import axios from 'axios';
 
 export default function SignIn() {
     //global state
@@ -39,11 +40,15 @@ export default function SignIn() {
 
     //use e
     useEffect(() => {
-        const g = async () => {
+        axios.get('auth/is-loggedin').catch(e => {
+            console.log("ck :", e);
+        })
+
+        const setUserLoggedInEmail = async () => {
             const ue = await Helper.getUserEmail()
             setInput({ ...input, [N_EMAIL]: ue })
         }
-        g()
+        setUserLoggedInEmail()
     }, [])
     //local method
 

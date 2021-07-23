@@ -27,6 +27,7 @@ class AuthAction {
                 })
                 resolve(resBoolean)
             } catch (e) {
+                console.log(e);
                 resolve(false)
             }
         })//end promise
@@ -66,8 +67,9 @@ class AuthAction {
                 //hit api get response 
                 const res = await axios.post('auth/login', { email, pass: password })
                 const { error, message, data } = res.data
-                //console.log("res.data", res.data)
+                console.log("res.data", res.data)
                 if (error) {
+                    console.log("error login: ", res.data)
                     reject(new Error(message))
                 } else {
                     //login success
@@ -87,6 +89,7 @@ class AuthAction {
                     resolve(response_ui)
                 }
             } catch (e) {
+                console.log("error login: ", e)
                 reject(new Error(e.message))
             }
         })//end promise

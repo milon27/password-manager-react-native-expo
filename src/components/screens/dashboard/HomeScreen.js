@@ -27,15 +27,20 @@ export default function HomeScreen() {
     //load category at once
 
     useEffect(() => {
-        // console.log("load category")
+        console.log("load category")
         const token = AxiosHelper.getSource()
         const load = async () => {
             try {
                 const uid = await Helper.getUserID()
                 const data = await AxiosHelper.getData(`pass/get-all-cat/${uid}/`, token)
                 if (data.success) {
-                    //console.log(data)
-                    setCat(data.object)
+                    console.log("data:", data)
+                    setCat(old => {
+                        return [{
+                            _id: "all_cat",
+                            title: "All"
+                        }, ...data.object]
+                    })
                     setSelect(cat[0]?._id)
                     Helper.encryptPass("")
                 }
@@ -61,7 +66,12 @@ export default function HomeScreen() {
                 //load password..
                 appac.START_LOADING()
                 const uid = await Helper.getUserID()
-                const val = await listAc.getAll(`pass/get-all/${uid}/${select}`, [])
+                if (select === "all_cat") {
+                    await listAc.getAll(`pass/get-all/${uid}/`, [])
+                } else {
+                    await listAc.getAll(`pass/get-all/${uid}/${select}`, [])
+                }
+                // const val =
                 //console.log("home pass val =", val)
                 appac.STOP_LOADING()
             } catch (e) {

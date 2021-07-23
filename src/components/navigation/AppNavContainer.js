@@ -21,6 +21,7 @@ export default function AppNavContainer() {
             //setLoading(true)
             //ck is logged in
             const authAc = new AuthAction(authDispatch)
+
             const ck = await authAc.IsLoggedIn()
             console.log("AppNavContainer:isLoggedin=", ck)
             if (ck) {

@@ -14,7 +14,7 @@ import AppAction from './../../../utils/context/actions/AppAction';
 import { StatusBar } from 'expo-status-bar';
 
 
-export default function CreatePassword({ route: { params } }) {
+export default function CreatePassword({ route: { params }, navigation }) {
 
     const item = params?.item;
 
@@ -76,6 +76,17 @@ export default function CreatePassword({ route: { params } }) {
         const token = AxiosHelper.getSource()
         const load = async () => {
             try {
+                //set old value if we have
+                if (item) {
+                    navigation.setOptions({
+                        title: `Update Password`,
+                    })
+                    const pass = await Helper.decryptPass(item[N_PASSWORD])
+                    setInput({ ...input, [N_PASSWORD]: pass })
+                    //setInput({ ...input, [N_PASSWORD]: pass })
+                    setValue(item[N_CAT]);
+                }
+
                 const uid = await Helper.getUserID()
                 const data = await AxiosHelper.getData(`pass/get-all-cat/${uid}/`, token)
                 if (data.success) {

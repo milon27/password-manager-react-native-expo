@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './../screens/dashboard/HomeScreen';
 import ContactDetail from './../screens/dashboard/ContactDetail';
 import CreatePassword from './../screens/dashboard/CreatePassword';
@@ -12,6 +12,7 @@ import Icon from './../layouts/icon/Icon';
 import DefineIcon from '../layouts/icon/DefineIcon';
 import CreateCategory from './../screens/dashboard/CreateCategory';
 import Fav from './../screens/favourite/Fav';
+import AllCat from './../screens/category/AllCat';
 
 const dashStack = createStackNavigator()
 /**
@@ -42,7 +43,7 @@ export default function DashStackNav() {
             <dashStack.Screen name={URL.HOME_SCREEN} component={HomeScreen}
                 options={
                     {
-                        title: "Passwordz",
+                        title: "M27Lab Password.",
                         // align-left
                         headerLeft: () => (<Icon size={28} type={DefineIcon.Feather} style={{ paddingHorizontal: 25 }} name="settings" onPress={() => { nav.toggleDrawer() }} />),
                         headerRight: () => {
@@ -53,6 +54,7 @@ export default function DashStackNav() {
             />
             <dashStack.Screen name={URL.CONTACT_DETAIL} component={ContactDetail} />
             <dashStack.Screen name={URL.CREATE_PASSWORD} component={CreatePassword} />
+            <dashStack.Screen name={URL.ALL_CATEGORY} component={AllCat} />
             <dashStack.Screen name={URL.CREATE_CATEGORY} component={CreateCategory} />
             <dashStack.Screen name={URL.FAV_PASSWORD} component={Fav} />
             <dashStack.Screen name={URL.ABOUT} component={About} />
