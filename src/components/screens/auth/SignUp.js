@@ -1,6 +1,6 @@
 
 import React, { useState, useContext } from 'react'
-import { StyleSheet, Text, Keyboard, ScrollView } from 'react-native';
+import { StyleSheet, Text, Keyboard, ScrollView, Image } from 'react-native';
 import Container from './../../layouts/Container';
 import Helper from './../../../utils/helpers/Helper';
 import Input from '../../layouts/form/Input';
@@ -16,6 +16,8 @@ import AppAction from './../../../utils/context/actions/AppAction';
 import DefineIcon from '../../layouts/icon/DefineIcon';
 import Icon from './../../layouts/icon/Icon';
 import { StatusBar } from 'expo-status-bar';
+import LOGO from '../../../assets/img/logo.png'
+
 
 export default function SignUp() {
 
@@ -87,6 +89,15 @@ export default function SignUp() {
 
             <Container style={{ paddingTop: 30 }}>
                 <StatusBar style={Theme.STATUS_BAR} />
+
+                <Image
+                    source={LOGO}
+                    width={100}
+                    height={100}
+                    style={styles.logo}
+                />
+
+
                 <Text style={styles.title}>Create Account Now</Text>
 
                 <ResponseLayout response={app?.response} />
@@ -144,5 +155,10 @@ const styles = StyleSheet.create({
         fontSize: 25,
         marginVertical: 15,
         padding: 7
+    },
+    logo: {
+        width: 100,
+        height: 100,
+        alignSelf: "center"
     }
 })

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, Text, Keyboard } from 'react-native';
+import { StyleSheet, Text, Keyboard, Image } from 'react-native';
 import Input from '../../layouts/form/Input';
 import Container from './../../layouts/Container';
 import URL from '../../../utils/helpers/URL';
@@ -16,6 +16,7 @@ import DefineIcon from '../../layouts/icon/DefineIcon';
 import Icon from './../../layouts/icon/Icon';
 import { StatusBar } from 'expo-status-bar';
 import axios from 'axios';
+import LOGO from '../../../assets/img/logo.png'
 
 export default function SignIn() {
     //global state
@@ -84,7 +85,12 @@ export default function SignIn() {
 
         <Container style={styles.container}>
 
-            <Icon style={styles.icon} type={DefineIcon.Feather} size={45} name="lock" />
+            <Image
+                source={LOGO}
+                width={100}
+                height={100}
+                style={styles.logo}
+            />
 
             <Text style={styles.title}>Hey, Login Now</Text>
 
@@ -129,5 +135,10 @@ const styles = StyleSheet.create({
     },
     container: {
         justifyContent: "center"
+    },
+    logo: {
+        width: 100,
+        height: 100,
+        alignSelf: "center"
     }
 })

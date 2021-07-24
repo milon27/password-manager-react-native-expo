@@ -65,7 +65,7 @@ export default function AppNavContainer() {
         <>
             <UserInactivity
                 isActive={active}
-                timeForInactivity={240000}
+                timeForInactivity={24000}
                 onAction={(a) => {
                     setactive(a)
                 }}
