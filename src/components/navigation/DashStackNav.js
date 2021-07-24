@@ -44,7 +44,7 @@ export default function DashStackNav() {
             <dashStack.Screen name={URL.HOME_SCREEN} component={HomeScreen}
                 options={
                     {
-                        title: "M27Lab Password.",
+                        title: "PASSWORDZ",
                         // align-left
                         headerLeft: () => (<Icon size={28} type={DefineIcon.Feather} style={{ paddingHorizontal: 25 }} name="settings" onPress={() => { nav.toggleDrawer() }} />),
                         headerRight: () => {

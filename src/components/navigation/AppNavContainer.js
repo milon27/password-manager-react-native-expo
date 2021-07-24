@@ -63,18 +63,18 @@ export default function AppNavContainer() {
 
     return (
         <>
-            {/* <UserInactivity
+            <UserInactivity
                 isActive={active}
-                timeForInactivity={30000}
+                timeForInactivity={240000}
                 onAction={(a) => {
                     setactive(a)
                 }}
-            > */}
-            <NavigationContainer>
-                {auth?.logged_in ? <DashDrawNav /> : <AuthNav />}
-                {/* <DashDrawNav /> */}
-            </NavigationContainer >
-            {/* </UserInactivity> */}
+            >
+                <NavigationContainer>
+                    {auth?.logged_in ? <DashDrawNav /> : <AuthNav />}
+                    {/* <DashDrawNav /> */}
+                </NavigationContainer >
+            </UserInactivity>
         </>
     )
 }

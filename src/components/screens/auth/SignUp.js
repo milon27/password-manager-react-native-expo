@@ -1,6 +1,6 @@
 
 import React, { useState, useContext } from 'react'
-import { StyleSheet, Text, Keyboard } from 'react-native';
+import { StyleSheet, Text, Keyboard, ScrollView } from 'react-native';
 import Container from './../../layouts/Container';
 import Helper from './../../../utils/helpers/Helper';
 import Input from '../../layouts/form/Input';
@@ -39,14 +39,6 @@ export default function SignUp() {
     const [input, setInput] = useState(init)
     const [error, setError] = useState(init)
 
-    // downloadTxtFile = () => {
-    //     const element = document.createElement("a");
-    //     const file = new Blob([document.getElementById('myInput').value], { type: 'text/plain' });
-    //     element.href = URL.createObjectURL(file);
-    //     element.download = "myFile.txt";
-    //     document.body.appendChild(element); // Required for this to work in FireFox
-    //     element.click();
-    // }
     const onSubmit = async () => {
         //validation
         const errorArray = Helper.validateObject(input)//should pass an object with key:value
@@ -91,35 +83,38 @@ export default function SignUp() {
     }
 
     return (
-        <Container style={styles.container}>
-            <StatusBar style={Theme.STATUS_BAR} />
-            <Text style={styles.title}>Create Account Now</Text>
+        <ScrollView style={{ backgroundColor: Theme.COLOR_BG }}>
 
-            <ResponseLayout response={app?.response} />
+            <Container style={{ paddingTop: 30 }}>
+                <StatusBar style={Theme.STATUS_BAR} />
+                <Text style={styles.title}>Create Account Now</Text>
 
-            <Input value={input.email}
-                icon={<Icon type={DefineIcon.MaterialIcon} size={17} name="alternate-email" />}
-                error={error?.email}
-                onChangeText={(text) => Helper.onChange({ name: N_EMAIL, value: text, setInput: setInput, setError: setError })} label="Enter Your Email" />
+                <ResponseLayout response={app?.response} />
 
-            <Input value={input.name} error={error?.name}
-                icon={<Icon type={DefineIcon.Feather} size={17} name="user" />}
-                onChangeText={(text) => Helper.onChange({ name: N_NAME, value: text, setInput: setInput, setError: setError })} label="Enter Your Name" />
+                <Input value={input.email}
+                    icon={<Icon type={DefineIcon.MaterialIcon} size={17} name="alternate-email" />}
+                    error={error?.email}
+                    onChangeText={(text) => Helper.onChange({ name: N_EMAIL, value: text, setInput: setInput, setError: setError })} label="Enter Your Email" />
 
-            <Input value={input[N_PASSWORD]} error={error[N_PASSWORD]}
-                icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />}
-                onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput: setInput, setError: setError })} type="password" label="Enter Master Password" />
+                <Input value={input.name} error={error?.name}
+                    icon={<Icon type={DefineIcon.Feather} size={17} name="user" />}
+                    onChangeText={(text) => Helper.onChange({ name: N_NAME, value: text, setInput: setInput, setError: setError })} label="Enter Your Name" />
 
-            <Input value={input[N_C_PASSWORD]} error={error[N_C_PASSWORD]}
-                icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />}
-                onChangeText={(text) => Helper.onChange({ name: N_C_PASSWORD, value: text, setInput: setInput, setError: setError })} type="password" label="Confirm Master Password" />
+                <Input value={input[N_PASSWORD]} error={error[N_PASSWORD]}
+                    icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />}
+                    onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput: setInput, setError: setError })} type="password" label="Enter Master Password" />
 
-            <MButton title="Sign Up Now" loading={app?.loading} color={Theme.COLOR_PRIMARY} onPress={onSubmit} disabled={app?.loading} />
-            {/* while loading.. it should be disabled */}
-            <Text style={styles.small_title1}>You can't reset master password,so don't forget it.</Text>
-            <NavLink title="Already have an account? Login Now" url={URL.SIGN_IN}></NavLink>
+                <Input value={input[N_C_PASSWORD]} error={error[N_C_PASSWORD]}
+                    icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />}
+                    onChangeText={(text) => Helper.onChange({ name: N_C_PASSWORD, value: text, setInput: setInput, setError: setError })} type="password" label="Confirm Master Password" />
 
-        </Container>
+                <MButton title="Sign Up Now" loading={app?.loading} color={Theme.COLOR_PRIMARY} onPress={onSubmit} disabled={app?.loading} />
+                {/* while loading.. it should be disabled */}
+                <Text style={styles.small_title1}>You can only change master password but can't recover master password if you forget it.So remember the master password.</Text>
+                <NavLink title="Already have an account? Login Now" url={URL.SIGN_IN}></NavLink>
+
+            </Container>
+        </ScrollView>
     );
 }
 
@@ -149,8 +144,5 @@ const styles = StyleSheet.create({
         fontSize: 25,
         marginVertical: 15,
         padding: 7
-    },
-    container: {
-        justifyContent: "center"
     }
 })
