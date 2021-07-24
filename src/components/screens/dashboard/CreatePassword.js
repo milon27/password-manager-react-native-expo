@@ -234,7 +234,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
 
                 <DropDownPicker
                     style={styles.dropDown}
-                    placeholder="Select Category (Max-3)"
+                    placeholder="Select A Category"
                     placeholderStyle={{
                         color: Theme.COLOR_GRAY
                     }}

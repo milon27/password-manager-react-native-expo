@@ -156,17 +156,19 @@ export default function HomeScreen() {
                 />
             </Container>
 
-            <Animated.View style={{
-                transform: [
-                    { translateX: translateY }
-                ]
-            }}>
-                <TouchableOpacity ref={addIcon} onPress={async () => {
-                    nav.navigate(URL.CREATE_PASSWORD)
-                }} style={styles.buttonCallout} >
+
+            <TouchableOpacity ref={addIcon} onPress={async () => {
+                nav.navigate(URL.CREATE_PASSWORD)
+            }} style={styles.buttonCallout} >
+                <Animated.View style={{
+                    transform: [
+                        { translateX: translateY }
+                    ]
+                }}>
                     <Icon size={65} style={styles.icon} name="add-circle" type={DefineIcon.Ionicon} />
-                </TouchableOpacity>
-            </Animated.View>
+                </Animated.View>
+            </TouchableOpacity>
+
 
 
 
