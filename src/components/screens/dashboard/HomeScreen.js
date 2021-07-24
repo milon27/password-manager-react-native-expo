@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { ActivityIndicator, FlatList, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useContext, useState, useEffect, useRef } from 'react'
+import { ActivityIndicator, FlatList, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import Container from '../../layouts/Container';
 import Theme from '../../../utils/helpers/Theme';
 import SingleRow from './SingleRow';
@@ -14,14 +14,25 @@ import DefineIcon from './../../layouts/icon/DefineIcon';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import URL from './../../../utils/helpers/URL';
 import { StatusBar } from 'expo-status-bar';
+
 export default function HomeScreen() {
+
+    const scrollY = new Animated.Value(0)
+    // const diffClamp=Diff
+    const translateY = scrollY.interpolate({
+        inputRange: [0, 60],
+        outputRange: [0, 70]
+    })
+
     const nav = useNavigation()
     const isFocused = useIsFocused();
+    const addIcon = useRef(null)
 
     const [cat, setCat] = useState([])
     const [select, setSelect] = useState(cat[0]?._id)
     const { app, pass } = useContext(StateContext)
     const { appDispatch, passDispatch } = useContext(DispatchContext)
+
 
     //load category at once
 
@@ -117,21 +128,48 @@ export default function HomeScreen() {
                 /> : <></>}
 
                 <FlatList
-                    style={{ paddingTop: 12 }}
+                    style={{ paddingTop: 12, marginBottom: 60 }}
                     data={pass}
                     renderItem={renderItem}
                     ListEmptyComponent={<Text style={{ color: Theme.COLOR_BLACK, padding: 10, textAlign: "center" }}>No Password Found In this Category!</Text>}
                     keyExtractor={item => (String(item._id))}
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}
+                    // onScrollEndDrag={() => {
+                    //     // addIcon.current.hide = true
+                    //     console.log("end...");
+                    // }}
+                    // onScrollBeginDrag={() => {
+                    //     console.log("top...");
+                    // }}
+                    onScroll={(e) => {
+                        let yvalue = e.nativeEvent.contentOffset.y
+                        scrollY.setValue(yvalue)
+                        // if (yvalue > 20) {
+                        //     //hide
+
+                        // } else {
+                        //     //show
+                        // }
+                    }}
+
                 />
             </Container>
 
-            <TouchableOpacity onPress={async () => {
-                nav.navigate(URL.CREATE_PASSWORD)
-            }} style={styles.buttonCallout} >
-                <Icon size={65} style={styles.icon} name="add-circle" type={DefineIcon.Ionicon} />
-            </TouchableOpacity>
+            <Animated.View style={{
+                transform: [
+                    { translateX: translateY }
+                ]
+            }}>
+                <TouchableOpacity ref={addIcon} onPress={async () => {
+                    nav.navigate(URL.CREATE_PASSWORD)
+                }} style={styles.buttonCallout} >
+                    <Icon size={65} style={styles.icon} name="add-circle" type={DefineIcon.Ionicon} />
+                </TouchableOpacity>
+            </Animated.View>
+
+
+
         </>
     )
 }
@@ -139,7 +177,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
     buttonCallout: {
         position: 'absolute',
-        bottom: 20,
+        bottom: 10,
         right: 25
     },
     icon: {

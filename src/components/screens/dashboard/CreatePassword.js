@@ -94,7 +94,6 @@ export default function CreatePassword({ route: { params }, navigation }) {
                     })
                     const pass = await Helper.decryptPass(item[N_PASSWORD])
                     setInput({ ...input, [N_PASSWORD]: pass })
-                    //setInput({ ...input, [N_PASSWORD]: pass })
                     setValue(item[N_CAT]);
                 }
 
@@ -247,9 +246,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
 
                     theme={Theme.STATUS_BAR_ALT.toUpperCase()}
 
-                    multiple={true}
-                    min={0}
-                    max={3}
+
                     open={open}
                     setOpen={setOpen}
                     value={value}

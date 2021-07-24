@@ -43,6 +43,8 @@ export default function SignIn() {
 
     //use e
     useEffect(() => {
+        let mounted = true
+
         axios.get('auth/is-loggedin').catch(e => {
             console.log("ck :", e);
         })
@@ -51,8 +53,12 @@ export default function SignIn() {
             const ue = await Helper.getUserEmail()
             setInput({ ...input, [N_EMAIL]: ue })
         }
-        if (isFocused) {
+        if (isFocused && mounted) {
             setUserLoggedInEmail()
+        }
+
+        return () => {
+            mounted = false
         }
 
     }, [isFocused])

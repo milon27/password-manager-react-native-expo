@@ -19,6 +19,7 @@ export default function PasswordModal({ open, setOpen, item }) {
     const [pass, setPass] = useState("")
 
     useEffect(() => {
+        let mounted = true
         const load = async () => {
             try {
                 const password = await Helper.decryptPass(item?.password)
@@ -27,8 +28,11 @@ export default function PasswordModal({ open, setOpen, item }) {
                 console.log("model: ", e);
             }
         }
-        if (isFocused) {
+        if (isFocused && mounted) {
             load()
+        }
+        return () => {
+            mounted = false
         }
 
     }, [isFocused])
