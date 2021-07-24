@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import MModal from './MModal'
 import Theme from './../../../utils/helpers/Theme';
@@ -7,11 +7,31 @@ import { DispatchContext } from './../../../utils/context/MainContext';
 import { useNavigation } from '@react-navigation/native';
 import URL from './../../../utils/helpers/URL';
 import AreYouSureAlert from './AreYouSureAlert';
+import Helper from './../../../utils/helpers/Helper';
+import { useIsFocused } from '@react-navigation/native';
 
 
 export default function PasswordModal({ open, setOpen, item }) {
     const nav = useNavigation()
     const { passDispatch } = useContext(DispatchContext)
+    const isFocused = useIsFocused();
+    //local
+    const [pass, setPass] = useState("")
+
+    useEffect(() => {
+        const load = async () => {
+            try {
+                const password = await Helper.decryptPass(item?.password)
+                setPass(password)
+            } catch (e) {
+                console.log("model: ", e);
+            }
+        }
+        if (isFocused) {
+            load()
+        }
+
+    }, [isFocused])
 
     const onSubmit = () => {
         setOpen(false)
@@ -31,6 +51,7 @@ export default function PasswordModal({ open, setOpen, item }) {
             <Text style={styles.text}>URL: {item?.url} </Text>
             <Text style={styles.text}>Username: {item?.username} </Text>
             <Text style={styles.text}>Email: {item?.email}</Text>
+            <Text selectable={true} style={styles.text}>Password: {pass}</Text>
         </MModal>
     )
 }

@@ -11,7 +11,7 @@ export default function AreYouSureAlert(msg, dothis) {
                 text: "Yes",
                 onPress: () => {
                     dothis()
-                    console.log("okkkk");
+                    // console.log("okkkk");
                 },
             },
             // The "No" button

@@ -3,9 +3,9 @@ import { StyleSheet, Image, Text, View, TouchableOpacity, Linking } from 'react-
 import Theme from './../../../utils/helpers/Theme';
 import Helper from './../../../utils/helpers/Helper';
 
-export default function SingleCat({ item, setSelect }) {
+export default function SingleCat({ item, setSelect, select }) {
 
-    return <View style={styles.item_container}>
+    return <View style={select === item?._id ? [styles.item_container, { backgroundColor: Theme.COLOR_PRIMARY }] : styles.item_container}>
         <TouchableOpacity onPress={() => {
             if (item.title !== "No Category")
                 setSelect(item?._id)
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 8,
         marginHorizontal: 5,
-        backgroundColor: Theme.COLOR_PRIMARY,
+        backgroundColor: Theme.COLOR_GRAY,
         borderRadius: 30,
     },
 

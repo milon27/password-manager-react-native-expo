@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, ActivityIndicator, FlatList } from 'react-native'
 import { useIsFocused } from "@react-navigation/native";
 import { StateContext, DispatchContext } from './../../../utils/context/MainContext';
@@ -14,6 +14,8 @@ export default function Fav() {
     const isFocused = useIsFocused();
     const { app, pass } = useContext(StateContext)
     const { appDispatch, passDispatch } = useContext(DispatchContext)
+
+
 
     useEffect(() => {
         // console.log("load password")

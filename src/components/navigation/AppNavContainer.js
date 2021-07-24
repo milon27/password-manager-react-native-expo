@@ -27,9 +27,7 @@ export default function AppNavContainer() {
             if (ck) {
                 //ck in localstorage
                 const u = await Helper.getUser()
-                //console.log("test: ", u)
-                //const u2 = await Helper.getPass()
-                //console.log("passsss:", u2)
+                // console.log("test: ", u)
                 if (!u) {
                     //not logged in
                     await authAc.Logout()

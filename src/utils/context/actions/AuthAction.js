@@ -4,6 +4,7 @@ import Define from './../../helpers/Define';
 import Types from "./Types";
 //import AsyncStorage from '@react-native-community/async-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Helper from "../../helpers/Helper";
 
 class AuthAction {
     constructor(dispatch) {
@@ -45,7 +46,8 @@ class AuthAction {
                     //logout success
                     //remove from localstorage/asyncstorage
                     await AsyncStorage.removeItem(Define.C_USER)
-                    await AsyncStorage.removeItem(Define.AUTH_PASS)
+                    //await AsyncStorage.removeItem(Define.AUTH_PASS)
+                    await AsyncStorage.removeItem(Define.AUTH_HASH_PASS)
                     //update UI
                     this.dispatch({
                         type: Types.AUTH_LOGOUT
@@ -76,7 +78,9 @@ class AuthAction {
                     //save to localstorage
                     //console.log("login response", data)
                     await AsyncStorage.setItem(Define.C_USER, JSON.stringify(data))
-                    await AsyncStorage.setItem(Define.AUTH_PASS, password)
+
+                    await AsyncStorage.setItem(Define.AUTH_HASH_PASS, Helper.getMasterPassHash(password))
+
                     await AsyncStorage.setItem(Define.AUTH_EMAIL, email)
 
                     //update UI
@@ -110,7 +114,8 @@ class AuthAction {
                     //save to localstorage
                     //delete data.token
                     await AsyncStorage.setItem(Define.C_USER, JSON.stringify(data))
-                    await AsyncStorage.setItem(Define.AUTH_PASS, student_obj.pass)
+
+                    await AsyncStorage.setItem(Define.AUTH_HASH_PASS, Helper.getMasterPassHash(student_obj.pass))
                     await AsyncStorage.setItem(Define.AUTH_EMAIL, student_obj.email)
                     //update UI
                     this.dispatch({

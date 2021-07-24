@@ -12,7 +12,7 @@ const Define = {
     NOT_SET: "NOT_SET",
     //local storage
     C_USER: "AUTH_C_USER",
-    AUTH_PASS: "AUTH_PASS",
+    AUTH_HASH_PASS: "AUTH_HASH_PASS",
     AUTH_EMAIL: "AUTH_EMAIL",
     CONTACTS: "CONTACTS",
 

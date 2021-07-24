@@ -72,21 +72,36 @@ const Helper = {
         const u = await AsyncStorage.getItem(Define.AUTH_EMAIL)
         return u
     },
-    getPass: async () => {
-        const u = await AsyncStorage.getItem(Define.AUTH_PASS)
-        return u
+    getMasterPassHash: (master_pass) => {
+        const hash = CryptoES.SHA256(master_pass).toString();
+        return hash
+    },
+    setPassHash: async (password) => {
+        await AsyncStorage.setItem(Define.AUTH_HASH_PASS, Helper.getMasterPassHash(password))
+    },
+    getPassHash: async () => {
+        const hash = await AsyncStorage.getItem(Define.AUTH_HASH_PASS)
+        return hash
     },
     encryptPass: async (pass) => {
-        const plainPassAsKey = await AsyncStorage.getItem(Define.AUTH_PASS)
-        const hash = CryptoES.SHA256(plainPassAsKey).toString();
+        //const plainPassAsKey = await AsyncStorage.getItem(Define.AUTH_PASS)
+        //const hash = CryptoES.SHA256(plainPassAsKey).toString();
+        const hash = await AsyncStorage.getItem(Define.AUTH_HASH_PASS)
+
         const encrypted = CryptoES.AES.encrypt(pass, hash);
         return encrypted.toString();
         // const decrypted = CryptoES.AES.decrypt(encrypted.toString(), key256Bits.toString());
         // return decrypted.toString(CryptoES.enc.Utf8)
     },
+    encryptPassWithHas: (pass, hash) => {
+        const encrypted = CryptoES.AES.encrypt(pass, hash);
+        return encrypted.toString();
+    },
     decryptPass: async (encrypted_str) => {
-        const plainPassAsKey = await AsyncStorage.getItem(Define.AUTH_PASS)
-        const hash = CryptoES.SHA256(plainPassAsKey).toString();
+        //const plainPassAsKey = await AsyncStorage.getItem(Define.AUTH_PASS)
+        //const hash = CryptoES.SHA256(plainPassAsKey).toString();
+
+        const hash = await AsyncStorage.getItem(Define.AUTH_HASH_PASS)
 
         const decrypted = CryptoES.AES.decrypt(encrypted_str, hash);
         return decrypted.toString(CryptoES.enc.Utf8)

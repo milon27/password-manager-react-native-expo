@@ -6,9 +6,9 @@ import Icon from './../icon/Icon';
 
 /**
  *
- * @param {{ref,type,returnKeyType,returnKeyLabel,label,icon,error,style,onSubmitEditing,nextRef}} props
+ * @param {{ref,type,returnKeyType,returnKeyLabel,label,icon,error,style,nextRef}} props
  */
-function Input({
+function RnInput({
     type = "default",
     returnKeyType = "done",
     returnKeyLabel = "done",
@@ -73,7 +73,9 @@ function Input({
     )
 }
 
-export default React.forwardRef(Input)
+const Input = React.forwardRef(RnInput)
+
+export default Input
 
 const styles = StyleSheet.create({
     container: {

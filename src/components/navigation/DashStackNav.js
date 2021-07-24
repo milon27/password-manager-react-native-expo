@@ -13,6 +13,7 @@ import DefineIcon from '../layouts/icon/DefineIcon';
 import CreateCategory from './../screens/dashboard/CreateCategory';
 import Fav from './../screens/favourite/Fav';
 import AllCat from './../screens/category/AllCat';
+import ChangePassword from './../screens/password/ChangePassword';
 
 const dashStack = createStackNavigator()
 /**
@@ -57,6 +58,7 @@ export default function DashStackNav() {
             <dashStack.Screen name={URL.ALL_CATEGORY} component={AllCat} />
             <dashStack.Screen name={URL.CREATE_CATEGORY} component={CreateCategory} />
             <dashStack.Screen name={URL.FAV_PASSWORD} component={Fav} />
+            <dashStack.Screen name={URL.CHANGE_PASSWORD} component={ChangePassword} />
             <dashStack.Screen name={URL.ABOUT} component={About} />
             <dashStack.Screen name={URL.SIGN_IN} component={SignIn} />
         </dashStack.Navigator >

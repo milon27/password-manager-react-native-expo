@@ -9,10 +9,9 @@ import { DispatchContext, StateContext } from './../../../utils/context/MainCont
 import ListAction from './../../../utils/context/actions/ListAction';
 import Helper from './../../../utils/helpers/Helper';
 import AppAction from './../../../utils/context/actions/AppAction';
-import { useIsFocused } from "@react-navigation/native";
 import Icon from './../../layouts/icon/Icon';
 import DefineIcon from './../../layouts/icon/DefineIcon';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import URL from './../../../utils/helpers/URL';
 import { StatusBar } from 'expo-status-bar';
 export default function HomeScreen() {
@@ -41,8 +40,8 @@ export default function HomeScreen() {
                             title: "All"
                         }, ...data.object]
                     })
+                    //set all_cat as id
                     setSelect(cat[0]?._id)
-                    Helper.encryptPass("")
                 }
             } catch (e) {
                 console.log("error HomeScreen.js->", e);
@@ -94,7 +93,7 @@ export default function HomeScreen() {
     }
 
     const renderCategory = ({ item }) => {
-        return <SingleCat setSelect={setSelect} item={item} />
+        return <SingleCat setSelect={setSelect} item={item} select={select} />
     }
 
     return (
