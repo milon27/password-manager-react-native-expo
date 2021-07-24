@@ -36,7 +36,7 @@ export default function DrawerContent({ navigation: nav }) {
                 <Image
                     height={50}
                     width={50}
-                    source={require('../../assets/img/logo.png')}
+                    source={require('../../../assets/icon.png')}
                     style={styles.logo}
                 />
             </View>

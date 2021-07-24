@@ -13,7 +13,7 @@ export default function Splash() {
                 <Image
                     height={75}
                     width={75}
-                    source={require('../../../assets/img/logo.png')}
+                    source={require('../../../../assets/icon.png')}
                     style={styles.logo}
                 />
             </View>
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         backgroundColor: Theme.COLOR_WHITE
     },
     text: {
-        color: Theme.COLOR_WHITE,
+        color: Theme.COLOR_PRIMARY,
         fontSize: 35,
         textAlign: "center"
     },

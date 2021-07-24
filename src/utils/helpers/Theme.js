@@ -30,7 +30,7 @@ const Theme1 = {
 
 const Theme = {
     COLOR_PRIMARY: "#6763D5",//
-    COLOR_ACCENT: "#6763D5",//
+    COLOR_ACCENT: "#FBE261",//
     COLOR_BG: "#FDFDFD",//
     COLOR_GRAY: "#909090",//
     COLOR_WHITE: "#fff",

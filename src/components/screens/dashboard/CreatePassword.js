@@ -12,10 +12,15 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import AxiosHelper from './../../../utils/helpers/AxiosHelper';
 import AppAction from './../../../utils/context/actions/AppAction';
 import { StatusBar } from 'expo-status-bar';
+import NavLink from './../../layouts/form/NavLink';
+import URL from './../../../utils/helpers/URL';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function CreatePassword({ route: { params }, navigation }) {
 
     const item = params?.item;
+
+    const isF = useIsFocused()
 
     const { app } = useContext(StateContext)
     const { appDispatch } = useContext(DispatchContext)
@@ -103,12 +108,14 @@ export default function CreatePassword({ route: { params }, navigation }) {
                 console.log("error Create Password.js->", e);
             }
         }
-        load()
+        if (isF) {
+            load()
+        }
 
         return () => {
             token.cancel()
         }
-    }, [cat.length])
+    }, [isF, cat.length])
 
     // local method
     const onSubmit = async () => {
@@ -158,9 +165,9 @@ export default function CreatePassword({ route: { params }, navigation }) {
         if (val.success) {
             setInput(clear_init)
             setValue([])
-            Helper.Toast("" + val.title)
+            Helper.Toast("" + val.desc)
         } else {
-            Helper.Toast("" + val.title)
+            Helper.Toast("" + val.desc)
         }
 
     }
@@ -168,7 +175,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
     return (
         <ScrollView style={{ backgroundColor: Theme.COLOR_BG }}>
 
-            <Container style={{ paddingTop: 30 }}>
+            <Container style={{ paddingVertical: 30 }}>
                 <StatusBar style={Theme.STATUS_BAR} />
 
                 <Input value={input[N_TITLE]} error={error[N_TITLE]}
@@ -268,6 +275,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
 
                 <MButton style={{ elevation: 0 }} title={item ? "Update Now" : "Create New"} loading={app?.loading} color={Theme.COLOR_PRIMARY} onPress={onSubmit} disabled={app?.loading} />
                 {/* while loading.. it should be disabled */}
+                <NavLink title="Don't have Category? Create New Now" url={URL.CREATE_CATEGORY}></NavLink>
             </Container>
         </ScrollView>
     )

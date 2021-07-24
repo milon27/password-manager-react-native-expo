@@ -16,9 +16,11 @@ import DefineIcon from '../../layouts/icon/DefineIcon';
 import Icon from './../../layouts/icon/Icon';
 import { StatusBar } from 'expo-status-bar';
 import axios from 'axios';
-import LOGO from '../../../assets/img/logo.png'
+import LOGO from '../../../../assets/icon.png'
+import { useIsFocused } from '@react-navigation/native';
 
 export default function SignIn() {
+    const isFocused = useIsFocused()
     //global state
     const { app } = useContext(StateContext)
     const { authDispatch, appDispatch } = useContext(DispatchContext)
@@ -49,8 +51,11 @@ export default function SignIn() {
             const ue = await Helper.getUserEmail()
             setInput({ ...input, [N_EMAIL]: ue })
         }
-        setUserLoggedInEmail()
-    }, [])
+        if (isFocused) {
+            setUserLoggedInEmail()
+        }
+
+    }, [isFocused])
     //local method
 
     const onSubmit = async () => {

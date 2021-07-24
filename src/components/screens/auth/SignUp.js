@@ -16,7 +16,7 @@ import AppAction from './../../../utils/context/actions/AppAction';
 import DefineIcon from '../../layouts/icon/DefineIcon';
 import Icon from './../../layouts/icon/Icon';
 import { StatusBar } from 'expo-status-bar';
-import LOGO from '../../../assets/img/logo.png'
+import LOGO from '../../../../assets/icon.png'
 
 
 export default function SignUp() {
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: Theme.COLOR_PRIMARY,
         fontSize: 25,
-        marginVertical: 15,
+        marginBottom: 15,
         padding: 7
     },
     logo: {

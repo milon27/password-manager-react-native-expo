@@ -14,6 +14,8 @@ import CreateCategory from './../screens/dashboard/CreateCategory';
 import Fav from './../screens/favourite/Fav';
 import AllCat from './../screens/category/AllCat';
 import ChangePassword from './../screens/password/ChangePassword';
+import { useFonts, LobsterTwo_400Regular } from '@expo-google-fonts/lobster-two';
+import { Text } from 'react-native';
 
 const dashStack = createStackNavigator()
 /**
@@ -21,6 +23,12 @@ const dashStack = createStackNavigator()
  */
 export default function DashStackNav() {
     const nav = useNavigation()
+
+    let [fontsLoaded] = useFonts({
+        LobsterTwo_400Regular
+    });
+
+
     return (
         <dashStack.Navigator initialRouteName={URL.HOME_SCREEN}
 
@@ -44,7 +52,10 @@ export default function DashStackNav() {
             <dashStack.Screen name={URL.HOME_SCREEN} component={HomeScreen}
                 options={
                     {
-                        title: "PASSWORDZ",
+                        title: "Passwordz",
+                        headerTitleStyle: {
+                            fontFamily: !fontsLoaded ? "" : 'LobsterTwo_400Regular', fontSize: 28
+                        },
                         // align-left
                         headerLeft: () => (<Icon size={28} type={DefineIcon.Feather} style={{ paddingHorizontal: 25 }} name="settings" onPress={() => { nav.toggleDrawer() }} />),
                         headerRight: () => {

@@ -25,9 +25,9 @@ export default function CreateCategory() {
         console.log("CreateCategory", val)
         if (val.success) {
             setTitle("")
-            Helper.Toast("" + val.title)
+            Helper.Toast("Category Created Succesfully.")
         } else {
-            Helper.Toast("" + val.title)
+            Helper.Toast("" + val.desc)
         }
     }
 
