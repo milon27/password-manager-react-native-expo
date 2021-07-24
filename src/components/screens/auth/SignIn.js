@@ -98,9 +98,9 @@ export default function SignIn() {
 
             <ResponseLayout response={app.response} />
 
-            <Input autoCapitalize={'none'} icon={<Icon type={DefineIcon.MaterialIcon} size={17} name="alternate-email" />} value={input.email} error={error?.email} onChangeText={(text) => Helper.onChange({ name: N_EMAIL, value: text, setInput: setInput, setError: setError })} label="Enter Your Email" />
+            <Input autoCapitalize={'none'} icon={<Icon type={DefineIcon.MaterialIcon} size={17} name="alternate-email" />} value={input.email} error={error?.email} onChangeText={(text) => Helper.onChange({ name: N_EMAIL, value: text, setInput: setInput, setError: setError, required: true })} label="Enter Your Email" />
 
-            <Input icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />} value={input.password} error={error?.password} onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput: setInput, setError: setError })} type="password" label="Enter Password" />
+            <Input icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />} value={input.password} error={error?.password} onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput: setInput, setError: setError, required: true })} type="password" label="Enter Password" />
 
 
             <MButton title="Login Now" loading={app?.loading} color={Theme.COLOR_PRIMARY} onPress={onSubmit} disabled={app?.loading} />

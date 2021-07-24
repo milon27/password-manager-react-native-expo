@@ -38,7 +38,7 @@ export default function SingleRow({ item }) {
             </View> */}
 
             <View>
-                <Text style={{ color: Theme.COLOR_BLACK, fontWeight: "bold" }}>{item?.url}</Text>
+                <Text style={{ color: Theme.COLOR_BLACK, fontWeight: "bold" }}>{item?.title}</Text>
                 <Text style={{ color: Theme.COLOR_BLACK, fontSize: 12 }}>{item?.email}</Text>
             </View>
         </View>

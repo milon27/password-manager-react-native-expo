@@ -35,6 +35,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
     const N_EMAIL = "email"
     const N_USERNAME = "username"
     const N_USER = "user"
+    const N_OTHER = "other"
     const N_CAT = "category"
     const N_IS_FAV = "is_fav"
 
@@ -44,6 +45,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
         [N_EMAIL]: item[N_EMAIL] || "",
         [N_USERNAME]: item[N_USERNAME] || "",
         [N_PASSWORD]: "",
+        [N_OTHER]: item[N_OTHER] || "",
         [N_USER]: item[N_USER] || "",
         [N_IS_FAV]: item[N_IS_FAV] || false,
     } : {
@@ -52,6 +54,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
         [N_EMAIL]: "",
         [N_USERNAME]: "",
         [N_PASSWORD]: "",
+        [N_OTHER]: "",
         [N_USER]: "",
         [N_IS_FAV]: false,
     }
@@ -61,15 +64,13 @@ export default function CreatePassword({ route: { params }, navigation }) {
         [N_EMAIL]: "",
         [N_USERNAME]: "",
         [N_PASSWORD]: "",
+        [N_OTHER]: "",
         [N_USER]: "",
         [N_IS_FAV]: false,
     }
 
     const error_init = {
         [N_TITLE]: "",
-        [N_URL]: "",
-        [N_EMAIL]: "",
-        [N_USERNAME]: "",
         [N_PASSWORD]: "",
     }
     const [cat, setCat] = useState([])
@@ -115,9 +116,6 @@ export default function CreatePassword({ route: { params }, navigation }) {
         //validation
         const errorArray = Helper.validateObject({
             [N_TITLE]: input[N_TITLE],
-            [N_URL]: input[N_URL],
-            [N_EMAIL]: input[N_EMAIL],
-            [N_USERNAME]: input[N_USERNAME],
             [N_PASSWORD]: input[N_PASSWORD]
         })
         errorArray.forEach(item => {
@@ -177,7 +175,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
                     ref={titleRef}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="feather" />}
                     label="Enter Password Title"
-                    onChangeText={(text) => Helper.onChange({ name: N_TITLE, value: text, setInput, setError })}
+                    onChangeText={(text) => Helper.onChange({ name: N_TITLE, value: text, setInput, setError, required: true })}
                     nextRef={urlRef}
                 />
                 <Input autoCapitalize={'none'} value={input[N_URL]} error={error[N_URL]}
@@ -215,8 +213,8 @@ export default function CreatePassword({ route: { params }, navigation }) {
                     value={input[N_PASSWORD]}
                     error={error[N_PASSWORD]}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />}
-                    label="Enter Site Password"
-                    onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput, setError })}
+                    label="Enter Site Password / PIN"
+                    onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput, setError, required: true })}
                 />
 
                 <View style={styles.justifyRow}>
@@ -260,6 +258,12 @@ export default function CreatePassword({ route: { params }, navigation }) {
                     zIndexInverse={3000}
                 />
 
+                <Input
+                    autoCapitalize={'none'} value={input[N_OTHER]} error={error[N_OTHER]}
+                    icon={<Icon type={DefineIcon.Feather} size={17} name="credit-card" />}
+                    label="Other Important Information"
+                    onChangeText={(text) => Helper.onChange({ name: N_OTHER, value: text, setInput, setError })}
+                />
 
 
                 <MButton style={{ elevation: 0 }} title={item ? "Update Now" : "Create New"} loading={app?.loading} color={Theme.COLOR_PRIMARY} onPress={onSubmit} disabled={app?.loading} />

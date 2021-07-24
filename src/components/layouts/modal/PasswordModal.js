@@ -48,10 +48,12 @@ export default function PasswordModal({ open, setOpen, item }) {
     return (
         <MModal title="Password Details" open={open || false} setOpen={setOpen} onSubmit={onSubmit} submitText="Delete Password" cancelText="Edit" onCancel={onEdit}>
             <Text style={styles.text}>Site: {item?.title} </Text>
-            <Text style={styles.text}>URL: {item?.url} </Text>
-            <Text style={styles.text}>Username: {item?.username} </Text>
-            <Text style={styles.text}>Email: {item?.email}</Text>
+            <Text selectable={true} style={styles.text}>URL: {item?.url} </Text>
+            <Text selectable={true} style={styles.text}>Username: {item?.username} </Text>
+            <Text selectable={true} style={styles.text}>Email: {item?.email}</Text>
             <Text selectable={true} style={styles.text}>Password: {pass}</Text>
+            {item?.other.length > 0 ? <Text selectable={true} style={styles.text}>Other Info: {item?.other}</Text> : null}
+
         </MModal>
     )
 }

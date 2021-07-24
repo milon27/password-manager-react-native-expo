@@ -44,13 +44,17 @@ const Helper = {
             alert(msg)
         }
     },//Toast
-    onChange: ({ name, value, setInput, setError }) => {
+    onChange: ({ name, value, setInput, setError, required = false }) => {
         setInput((input) => ({ ...input, [name]: value }))
         //check error & remove error
         if (value !== "") {
             setError((pre) => ({ ...pre, [name]: "" }))
         } else {
-            setError((pre) => ({ ...pre, [name]: "This field is required" }))
+            if (required === true) {
+                setError((pre) => ({ ...pre, [name]: "This field is required" }))
+            } else {
+                setError((pre) => ({ ...pre, [name]: "" }))
+            }
         }
     },
     ramdomColor: () => {

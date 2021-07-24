@@ -105,19 +105,19 @@ export default function SignUp() {
                 <Input value={input.email}
                     icon={<Icon type={DefineIcon.MaterialIcon} size={17} name="alternate-email" />}
                     error={error?.email}
-                    onChangeText={(text) => Helper.onChange({ name: N_EMAIL, value: text, setInput: setInput, setError: setError })} label="Enter Your Email" />
+                    onChangeText={(text) => Helper.onChange({ name: N_EMAIL, value: text, setInput: setInput, setError: setError, required: true })} label="Enter Your Email" />
 
                 <Input value={input.name} error={error?.name}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="user" />}
-                    onChangeText={(text) => Helper.onChange({ name: N_NAME, value: text, setInput: setInput, setError: setError })} label="Enter Your Name" />
+                    onChangeText={(text) => Helper.onChange({ name: N_NAME, value: text, setInput: setInput, setError: setError, required: true })} label="Enter Your Name" />
 
                 <Input value={input[N_PASSWORD]} error={error[N_PASSWORD]}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />}
-                    onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput: setInput, setError: setError })} type="password" label="Enter Master Password" />
+                    onChangeText={(text) => Helper.onChange({ name: N_PASSWORD, value: text, setInput: setInput, setError: setError, required: true })} type="password" label="Enter Master Password" />
 
                 <Input value={input[N_C_PASSWORD]} error={error[N_C_PASSWORD]}
                     icon={<Icon type={DefineIcon.Feather} size={17} name="lock" />}
-                    onChangeText={(text) => Helper.onChange({ name: N_C_PASSWORD, value: text, setInput: setInput, setError: setError })} type="password" label="Confirm Master Password" />
+                    onChangeText={(text) => Helper.onChange({ name: N_C_PASSWORD, value: text, setInput: setInput, setError: setError, required: true })} type="password" label="Confirm Master Password" />
 
                 <MButton title="Sign Up Now" loading={app?.loading} color={Theme.COLOR_PRIMARY} onPress={onSubmit} disabled={app?.loading} />
                 {/* while loading.. it should be disabled */}

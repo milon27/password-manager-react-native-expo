@@ -63,7 +63,9 @@ const styles = StyleSheet.create({
         marginTop: 20,
         alignSelf: "flex-start",
         borderRadius: 50,
-        backgroundColor: Theme.COLOR_PRIMARY,
+        borderWidth: 1,
+        borderColor: Theme.COLOR_PRIMARY,
+        backgroundColor: Theme.COLOR_WHITE,
         padding: 10
     },
     container: {
