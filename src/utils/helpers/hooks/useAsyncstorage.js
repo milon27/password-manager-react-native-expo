@@ -27,10 +27,10 @@ export default function useAsyncStorage(key, initValue) {
 
     useEffect(() => {
         const load = async () => {
-            await AsyncStorage.setItem(prefixed_key, JSON.stringify(initValue))
+            await AsyncStorage.setItem(prefixed_key, JSON.stringify(user))
         }
         load()
-    }, [prefixed_key, state])
+    }, [prefixed_key, user])
 
     return [user, setUser]
 }

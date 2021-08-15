@@ -24,8 +24,8 @@ export default function useLocalstorage(key, initValue) {
     })
 
     useEffect(() => {
-        localStorage.setItem(prefixed_key, JSON.stringify(initValue))
-    }, [prefixed_key, state])
+        localStorage.setItem(prefixed_key, JSON.stringify(user))
+    }, [prefixed_key, user])
 
     return [user, setUser]
 }
