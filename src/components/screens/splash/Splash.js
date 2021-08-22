@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image, ActivityIndicator } from 'react-native'
 import Theme from './../../../utils/helpers/Theme';
 import { StatusBar } from 'expo-status-bar';
 
@@ -17,6 +17,7 @@ export default function Splash() {
                     style={styles.logo}
                 />
             </View>
+            <ActivityIndicator color={Theme.COLOR_PRIMARY} />
             {/* <Text style={styles.text}>Password</Text>
             <Text style={styles.text}>Manager</Text> */}
         </View>

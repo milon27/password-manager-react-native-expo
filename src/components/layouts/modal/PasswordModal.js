@@ -22,13 +22,17 @@ export default function PasswordModal({ open, setOpen, item }) {
         let mounted = true
         const load = async () => {
             try {
+
                 const password = await Helper.decryptPass(item?.password)
-                setPass(password)
+                if (mounted === true) {
+                    //console.log("mounted=== ", mounted);
+                    setPass(password)
+                }
             } catch (e) {
                 console.log("model: ", e);
             }
         }
-        if (isFocused && mounted) {
+        if (isFocused === true) {
             load()
         }
         return () => {
