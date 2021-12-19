@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import MModal from './MModal'
 import Theme from './../../../utils/helpers/Theme';
 import ListAction from './../../../utils/context/actions/ListAction';
@@ -22,7 +22,6 @@ export default function PasswordModal({ open, setOpen, item }) {
         let mounted = true
         const load = async () => {
             try {
-
                 const password = await Helper.decryptPass(item?.password)
                 if (mounted === true) {
                     //console.log("mounted=== ", mounted);
@@ -32,14 +31,14 @@ export default function PasswordModal({ open, setOpen, item }) {
                 console.log("model: ", e);
             }
         }
-        if (isFocused === true) {
+        if (isFocused === true && open === true) {
             load()
         }
         return () => {
             mounted = false
         }
 
-    }, [isFocused])
+    }, [isFocused, open])
 
     const onSubmit = () => {
         setOpen(false)

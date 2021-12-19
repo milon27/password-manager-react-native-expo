@@ -1,7 +1,9 @@
 1. search 
-
+    1.1. fix edit reselect category
+    1.2. remove pass user from create pass, create category
+    and some params. 
 2. email save.
-3. edit
+3. cat edit
 
 
 "splash": {

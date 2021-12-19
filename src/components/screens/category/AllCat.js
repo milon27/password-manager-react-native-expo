@@ -19,8 +19,7 @@ export default function AllCat() {
         const token = AxiosHelper.getSource()
         const load = async () => {
             try {
-                const uid = await Helper.getUserID()
-                const data = await AxiosHelper.getData(`pass/get-all-cat/${uid}/`, token)
+                const data = await AxiosHelper.getData(`pass/get-all-cat/`, token)
                 if (data.success) {
                     // console.log("data:", data)
                     setCat(data.object)

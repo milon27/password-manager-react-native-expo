@@ -10,6 +10,7 @@ import { StateContext } from './../../../utils/context/MainContext';
 import Theme from './../../../utils/helpers/Theme';
 import AxiosHelper from './../../../utils/helpers/AxiosHelper';
 import { StatusBar } from 'expo-status-bar';
+
 export default function CreateCategory() {
     const { app } = useContext(StateContext)
     const [title, setTitle] = useState("")
@@ -20,8 +21,8 @@ export default function CreateCategory() {
             setError("Enter category title.")
             return
         }
-        const userId = await Helper.getUserID()
-        let val = await AxiosHelper.addData('pass/create-cat', { title, user: userId })
+
+        let val = await AxiosHelper.addData('pass/create-cat', { title })
         console.log("CreateCategory", val)
         if (val.success) {
             setTitle("")

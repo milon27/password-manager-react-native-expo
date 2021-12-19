@@ -41,8 +41,7 @@ export default function HomeScreen() {
         const token = AxiosHelper.getSource()
         const load = async () => {
             try {
-                const uid = await Helper.getUserID()
-                const data = await AxiosHelper.getData(`pass/get-all-cat/${uid}/`, token)
+                const data = await AxiosHelper.getData(`pass/get-all-cat/`, token)
                 if (data.success) {
                     // console.log("data:", data)
                     setCat(old => {
@@ -75,11 +74,10 @@ export default function HomeScreen() {
             try {
                 //load password..
                 appac.START_LOADING()
-                const uid = await Helper.getUserID()
                 if (select === "all_cat") {
-                    await listAc.getAll(`pass/get-all/${uid}/`, [])
+                    await listAc.getAll(`pass/get-all/`, [])
                 } else {
-                    await listAc.getAll(`pass/get-all/${uid}/${select}`, [])
+                    await listAc.getAll(`pass/get-all/${select}`, [])
                 }
                 // const val =
                 //console.log("home pass val =", val)
@@ -96,7 +94,7 @@ export default function HomeScreen() {
         return () => {
             token.cancel()
         }
-    }, [isFocused, select, pass.length])
+    }, [isFocused, select])
 
 
     const renderItem = ({ item }) => {

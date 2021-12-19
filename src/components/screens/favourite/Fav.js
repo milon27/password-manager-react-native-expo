@@ -7,8 +7,8 @@ import Theme from '../../../utils/helpers/Theme';
 import Container from './../../layouts/Container';
 import ListAction from './../../../utils/context/actions/ListAction';
 import AppAction from './../../../utils/context/actions/AppAction';
-import Helper from './../../../utils/helpers/Helper';
 import { StatusBar } from 'expo-status-bar';
+
 export default function Fav() {
 
     const isFocused = useIsFocused();
@@ -26,8 +26,7 @@ export default function Fav() {
             try {
                 //load password..
                 appac.START_LOADING()
-                const uid = await Helper.getUserID()
-                const val = await listAc.getAll(`pass/get-all-fav/${uid}/`, [])
+                const val = await listAc.getAll(`pass/get-all-fav/`, [])
                 //console.log("fav pass val =", val)
                 appac.STOP_LOADING()
             } catch (e) {

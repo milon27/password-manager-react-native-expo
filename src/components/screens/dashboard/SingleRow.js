@@ -9,9 +9,11 @@ import PasswordModal from './../../layouts/modal/PasswordModal';
 import AreYouSureModal from './../../layouts/modal/AreYouSureModal';
 
 export default function SingleRow({ item }) {
+    const [modalItem, setModalItem] = useState(null)
     const [open, setOpen] = useState(false)
     const [open1, setOpen1] = useState(false)
     const onPress = () => {
+        setModalItem(item)
         setOpen(true)
     }
 
@@ -25,7 +27,7 @@ export default function SingleRow({ item }) {
     return <TouchableOpacity onPress={onPress} onLongPress={onLongPress} style={styles.item_container}>
         {/* {console.log("row -> ", item)} */}
 
-        <PasswordModal setOpen={setOpen} open={open} item={item} />
+        <PasswordModal setOpen={setOpen} open={open} item={modalItem} />
         <AreYouSureModal setOpen={setOpen1} open={open1} submitText="Delete Password" onSubmit={onDelete} />
 
         <View style={{ flexDirection: "row", alignItems: "center" }}>

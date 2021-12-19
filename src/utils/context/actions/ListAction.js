@@ -2,6 +2,7 @@ import axios from 'axios'
 import Response from '../../helpers/Response';
 import Types from './Types';
 import Define from './../../helpers/Define';
+import Helper from '../../helpers/Helper';
 
 class ListAction {
     constructor(dispatch) {
@@ -19,10 +20,15 @@ class ListAction {
                 , {
                     cancelToken: this.source.token
                 }
-            ).then(res => {
+            ).then((res) => {
                 const { error, message, data } = res.data
                 if (error === false) {//no error
                     //dispatch the global state
+                    // console.log("getting the all pass");
+                    // data.forEach(async (item) => {
+                    //     const val = await Helper.decryptPass(item.password)
+                    //     console.log("pass server -> ", val);
+                    // })
                     this.dispatch({
                         type: Types.GET_DATA,
                         payload: data//an array

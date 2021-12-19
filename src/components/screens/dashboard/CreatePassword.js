@@ -25,7 +25,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
     const { app } = useContext(StateContext)
     const { appDispatch } = useContext(DispatchContext)
 
-    const [value, setValue] = useState([]);
+    const [value, setValue] = useState(null);//single : null, multi: []
     const [open, setOpen] = useState(false);
 
     const titleRef = useRef(null)
@@ -39,7 +39,6 @@ export default function CreatePassword({ route: { params }, navigation }) {
     const N_PASSWORD = "password"
     const N_EMAIL = "email"
     const N_USERNAME = "username"
-    const N_USER = "user"
     const N_OTHER = "other"
     const N_CAT = "category"
     const N_IS_FAV = "is_fav"
@@ -51,7 +50,6 @@ export default function CreatePassword({ route: { params }, navigation }) {
         [N_USERNAME]: item[N_USERNAME] || "",
         [N_PASSWORD]: "",
         [N_OTHER]: item[N_OTHER] || "",
-        [N_USER]: item[N_USER] || "",
         [N_IS_FAV]: item[N_IS_FAV] || false,
     } : {
         [N_TITLE]: "",
@@ -60,7 +58,6 @@ export default function CreatePassword({ route: { params }, navigation }) {
         [N_USERNAME]: "",
         [N_PASSWORD]: "",
         [N_OTHER]: "",
-        [N_USER]: "",
         [N_IS_FAV]: false,
     }
     const clear_init = {
@@ -70,7 +67,6 @@ export default function CreatePassword({ route: { params }, navigation }) {
         [N_USERNAME]: "",
         [N_PASSWORD]: "",
         [N_OTHER]: "",
-        [N_USER]: "",
         [N_IS_FAV]: false,
     }
 
@@ -94,14 +90,14 @@ export default function CreatePassword({ route: { params }, navigation }) {
                     })
                     const pass = await Helper.decryptPass(item[N_PASSWORD])
                     setInput({ ...input, [N_PASSWORD]: pass })
-                    setValue(item[N_CAT]);
+                    //console.log("all cat of the current item-", item[N_CAT])//get 1st one.
+                    setValue(item[N_CAT][0]);//set old category. or selected item.
                 }
 
-                const uid = await Helper.getUserID()
-                const data = await AxiosHelper.getData(`pass/get-all-cat/${uid}/`, token)
+                const data = await AxiosHelper.getData(`pass/get-all-cat/`, token)
                 if (data.success) {
-                    //console.log("cat: ", data.object)
-                    setCat(data.object)
+                    //console.log("pass/get-all-cat/: ", data.object)//[]
+                    setCat(data.object)//set the cat list in dropdown
                 }
             } catch (e) {
                 console.log("error Create Password.js->", e);
@@ -141,7 +137,6 @@ export default function CreatePassword({ route: { params }, navigation }) {
         const data = {
             ...input,
             [N_PASSWORD]: await Helper.encryptPass(input[N_PASSWORD]),
-            [N_USER]: await Helper.getUserID(),
             [N_CAT]: value
         }
 
@@ -163,7 +158,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
         appac.STOP_LOADING()
         if (val.success) {
             setInput(clear_init)
-            setValue([])
+            setValue(null)
             Helper.Toast("" + val.desc)
         } else {
             Helper.Toast("" + val.desc)
@@ -246,7 +241,7 @@ export default function CreatePassword({ route: { params }, navigation }) {
 
                     theme={Theme.STATUS_BAR_ALT.toUpperCase()}
 
-
+                    multiple={false}
                     open={open}
                     setOpen={setOpen}
                     value={value}

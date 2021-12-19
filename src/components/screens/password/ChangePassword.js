@@ -33,7 +33,6 @@ export default function ChangePassword() {
         [N_NEW_C_PASSWORD]: "",
     }
     //state
-    const [uid, setUid] = useState("")
     const [input, setInput] = useState(initValue)
     const [error, setError] = useState(initValue)
     //effect
@@ -45,9 +44,7 @@ export default function ChangePassword() {
 
             try {
                 //load password..
-                const uid = await Helper.getUserID()
-                setUid(uid)
-                const val = await listAc.getAll(`pass/get-all/${uid}/`, [])
+                const val = await listAc.getAll(`pass/get-all/`, [])
                 //console.log("change pass val =", val)
             } catch (e) {
                 console.log("error ChangePassword.js->", e);
@@ -109,7 +106,6 @@ export default function ChangePassword() {
         const data = {
             arr: resultArray,
             user: {
-                _id: uid,
                 pass: input[N_NEW_PASSWORD]
             }
         }

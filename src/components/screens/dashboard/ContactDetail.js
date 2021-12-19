@@ -13,6 +13,11 @@ import OfflineListAction from './../../../utils/context/actions/OfflineListActio
 import Define from '../../../utils/helpers/Define';
 import { DispatchContext } from '../../../utils/context/MainContext';
 
+/**
+ * 
+ * @param {*} param0 
+ * @returns not used in this project.
+ */
 export default function ContactDetail({ route: { params } }) {
     const { navigate, setOptions } = useNavigation()
 
