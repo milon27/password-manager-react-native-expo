@@ -17,6 +17,8 @@ function RnInput({
     error,
     style,
     nextRef,
+    onDone = null,
+    hideLevel = false,
     ...pros }, ref) {
 
     const [secure, setSecure] = useState(true)
@@ -37,7 +39,8 @@ function RnInput({
 
     return (
         <View style={[styles.container, style]}>
-            <Text style={styles.label}>{label}</Text>
+            {hideLevel === true ? <></> : <Text style={styles.label}>{label}</Text>}
+
 
             <View style={[styles.inputContainer, { borderColor: getBorder() }]}>
                 <View style={styles.icon}>{icon}</View>
@@ -58,7 +61,12 @@ function RnInput({
                         onSubmitEditing={() => {
                             if (nextRef) {
                                 nextRef?.current?.focus()
-                            } else {
+                            }
+                            else if (onDone) {
+                                Keyboard.dismiss()
+                                onDone()
+                            }
+                            else {
                                 Keyboard.dismiss()
                             }
                         }}

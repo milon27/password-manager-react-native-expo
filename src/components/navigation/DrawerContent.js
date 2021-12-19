@@ -20,6 +20,9 @@ export default function DrawerContent({ navigation: nav }) {
         { title: "Create Password", icon: <Icon type={DefineIcon.Feather} name="lock" />, onPress: () => { nav.navigate(URL.CREATE_PASSWORD) } },
         { title: "All Category", icon: <Icon type={DefineIcon.Feather} name="paperclip" />, onPress: () => { nav.navigate(URL.ALL_CATEGORY) } },
         { title: "Create Category", icon: <Icon type={DefineIcon.MaterialIcon} name="playlist-add" />, onPress: () => { nav.navigate(URL.CREATE_CATEGORY) } },
+
+        { title: "Favourite Password", icon: <Icon type={DefineIcon.Feather} name="heart" />, onPress: () => { nav.navigate(URL.FAV_PASSWORD) } },
+
         { title: "Change Password", icon: <Icon type={DefineIcon.MaterialCommunityIcon} name="circle-edit-outline" />, onPress: () => { nav.navigate(URL.CHANGE_PASSWORD) } },
         { title: "About", icon: <Icon type={DefineIcon.AntDesign} name="customerservice" />, onPress: () => { nav.navigate(URL.ABOUT) } },
         { title: "Log Out", icon: <Icon type={DefineIcon.Feather} name="log-out" />, onPress: logoutNow }

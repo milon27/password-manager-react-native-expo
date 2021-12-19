@@ -16,6 +16,7 @@ import AllCat from './../screens/category/AllCat';
 import ChangePassword from './../screens/password/ChangePassword';
 import { useFonts, LobsterTwo_400Regular } from '@expo-google-fonts/lobster-two';
 import { Text } from 'react-native';
+import Search from '../screens/search/Search';
 
 const dashStack = createStackNavigator()
 /**
@@ -59,7 +60,7 @@ export default function DashStackNav() {
                         // align-left
                         headerLeft: () => (<Icon size={28} type={DefineIcon.Feather} style={{ paddingHorizontal: 25 }} name="settings" onPress={() => { nav.toggleDrawer() }} />),
                         headerRight: () => {
-                            return <Icon size={28} type={DefineIcon.Feather} style={{ paddingHorizontal: 25 }} name="bookmark" onPress={() => { nav.navigate(URL.FAV_PASSWORD) }} />
+                            return <Icon size={28} type={DefineIcon.Feather} style={{ paddingHorizontal: 25 }} name="search" onPress={() => { nav.navigate(URL.SEARCH_PASSWORD) }} />
                         }
                     }
                 }//home header style
@@ -69,6 +70,7 @@ export default function DashStackNav() {
             <dashStack.Screen name={URL.ALL_CATEGORY} component={AllCat} />
             <dashStack.Screen name={URL.CREATE_CATEGORY} component={CreateCategory} />
             <dashStack.Screen name={URL.FAV_PASSWORD} component={Fav} />
+            <dashStack.Screen name={URL.SEARCH_PASSWORD} component={Search} />
             <dashStack.Screen name={URL.CHANGE_PASSWORD} component={ChangePassword} />
             <dashStack.Screen name={URL.ABOUT} component={About} />
             <dashStack.Screen name={URL.SIGN_IN} component={SignIn} />

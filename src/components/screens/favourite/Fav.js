@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, Text, ActivityIndicator, FlatList } from 'react-native'
+import { Text, ActivityIndicator, FlatList } from 'react-native'
 import { useIsFocused } from "@react-navigation/native";
 import { StateContext, DispatchContext } from './../../../utils/context/MainContext';
 import SingleRow from './../dashboard/SingleRow';
