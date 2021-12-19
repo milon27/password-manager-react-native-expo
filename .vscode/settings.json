@@ -1,12 +1,12 @@
-// Workspace settings
-{
-    // The following will hide the js and map files in the editor
-    "files.exclude": {
-        ".expo": true,
-        ".expo-shared": true,
-        "android": true,
-        "node_modules": true,
-        "package-lock.json": true,
-        "**/*.map": true
-    }
-}
+// // Workspace settings
+// {
+//     // The following will hide the js and map files in the editor
+//     "files.exclude": {
+//         ".expo": true,
+//         ".expo-shared": true,
+//         "android": true,
+//         "node_modules": true,
+//         "package-lock.json": true,
+//         "**/*.map": true
+//     }
+// }

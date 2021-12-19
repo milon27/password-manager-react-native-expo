@@ -2,7 +2,6 @@ import axios from "axios"
 import Response from './../../helpers/Response';
 import Define from './../../helpers/Define';
 import Types from "./Types";
-//import AsyncStorage from '@react-native-community/async-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Helper from "../../helpers/Helper";
 

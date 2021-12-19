@@ -1,7 +1,6 @@
 import Response from '../../helpers/Response';
 import Types from './Types';
 import Define from '../../helpers/Define';
-//import AsyncStorage from '@react-native-community/async-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 class OfflineListAction {
