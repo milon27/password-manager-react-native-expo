@@ -1,5 +1,5 @@
 const Define = {
-    API_BASE_URL: "https://passapi.milon27.ml/",//https://password-manager-api-27.herokuapp.com/,http://192.168.4.65:2727/
+    API_BASE_URL: "https://api.domain.com/",//
     //time format
     FORMAT_DATE: "DD-MM-YYYY",
     //bootstrap color
