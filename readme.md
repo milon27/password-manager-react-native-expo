@@ -1,6 +1,8 @@
 ## React Native Expo Password Manager
 
->> used technology
+>> All passwords/data are secure, I am using client-side encryption. no raw data is going to our server, all data are encrypted in the client and then transfer to the server.
+
+>> Used technology
 
 * React Native Expo
 * Context Api and React Hooks
@@ -11,7 +13,7 @@
 
 
 >> apk file
-<a href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40milon27/password-manager-dd067be15d444116a84b838c850028ea-signed.apk" download>Click to Download</a>
+<a href="https://drive.google.com/file/d/1JXg-B0PUI3vA9JQ1M-xR3iqZ_5cJAFVu/view?usp=drive_link" download>Click to Download</a>
 
 >> app screenshot
 
